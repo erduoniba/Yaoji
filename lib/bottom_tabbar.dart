@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'pages/home.dart';
-import 'pages/yaobo.dart';
-import 'pages/souyao.dart';
-import 'pages/loushi.dart';
+import 'pages/home/home.dart';
+import 'pages/yaobo/yaobo.dart';
+import 'pages/souyao/souyao.dart';
+import 'pages/loushi/loushi.dart';
 
 class YJBottomTabbar extends StatefulWidget {
   const YJBottomTabbar({super.key});

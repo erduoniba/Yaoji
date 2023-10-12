@@ -18,6 +18,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   # flutter gen-l10n
   intl: any
+  easy_refresh: ^3.3.2+1
 
 dev_dependencies:
   flutter_test:
