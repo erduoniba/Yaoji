@@ -19,6 +19,7 @@ dependencies:
   # flutter gen-l10n
   intl: any
   easy_refresh: ^3.3.2+1
+  dio: ^5.3.3
 
 dev_dependencies:
   flutter_test:

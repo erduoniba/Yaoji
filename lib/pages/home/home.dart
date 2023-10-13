@@ -3,7 +3,7 @@ import 'package:yaoji/common/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:yaoji/common/widgets/list_header.dart';
-import 'package:yaoji/common/widgets/list_header.dart';
+import 'package:yaoji/pages/home/requests/home_data.dart';
 
 class YJHomePage extends StatefulWidget {
   const YJHomePage({super.key});
@@ -31,6 +31,69 @@ class _YJHomePageState extends State<YJHomePage> {
     super.dispose();
   }
 
+  request() {
+    HomeData.getHomeAdvData();
+  }
+
+  Widget homeListView() {
+    return EasyRefresh(
+      controller: _controller,
+      header: YJListHeader.listHeader(),
+      footer: YJListHeader.listFooter(),
+      onRefresh: () async {
+        await Future.delayed(Duration(seconds: 1));
+        if (!mounted) {
+          return;
+        }
+        setState(() {
+          _count = 10;
+        });
+        _controller.finishRefresh();
+        _controller.resetFooter();
+
+        request();
+      },
+      onLoad: () async {
+        await Future.delayed(Duration(seconds: 1));
+        if (!mounted) {
+          return;
+        }
+        setState(() {
+          _count += 6;
+        });
+        if (_count > 20) {
+          _controller.finishLoad(IndicatorResult.noMore);
+        } else {
+          _controller.finishLoad(IndicatorResult.success);
+        }
+      },
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return Card(
+            child: Container(
+              alignment: Alignment.center,
+              height: 80,
+              child: Text('index: ($index + 1)'),
+            ),
+          );
+        },
+        itemCount: _count,
+      ),
+    );
+  }
+
+  Widget testView() {
+    return Container(
+      alignment: Alignment.center,
+      child: TextButton(
+        child: const Text('request'),
+        onPressed: () {
+          request();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
@@ -43,48 +106,8 @@ class _YJHomePageState extends State<YJHomePage> {
           ),
         ),
       ),
-      body: EasyRefresh(
-        controller: _controller,
-        header: YJListHeader.listHeader(),
-        footer: YJListHeader.listFooter(),
-        onRefresh: () async {
-          await Future.delayed(Duration(seconds: 1));
-          if (!mounted) {
-            return;
-          }
-          setState(() {
-            _count = 10;
-          });
-          _controller.finishRefresh();
-          _controller.resetFooter();
-        },
-        onLoad: () async {
-          await Future.delayed(Duration(seconds: 1));
-          if (!mounted) {
-            return;
-          }
-          setState(() {
-            _count += 6;
-          });
-          if (_count > 20) {
-            _controller.finishLoad(IndicatorResult.noMore);
-          } else {
-            _controller.finishLoad(IndicatorResult.success);
-          }
-        },
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return Card(
-              child: Container(
-                alignment: Alignment.center,
-                height: 80,
-                child: Text('index: ($index + 1)'),
-              ),
-            );
-          },
-          itemCount: _count,
-        ),
-      ),
+      // body: homeListView(),
+      body: testView(),
     );
   }
 }
