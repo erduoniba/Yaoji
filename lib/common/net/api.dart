@@ -7,6 +7,11 @@ import 'package:yaoji/common/net/result_data.dart';
 import 'package:yaoji/common/net/response_interceptor.dart';
 import 'package:yaoji/common/net/net_code.dart';
 
+// 网络异常 The connection errored: Failed host lookup
+// 解决方案：
+// 1、尝试重启VSCode、删除App重新运行；
+// 2、手机重启网络
+
 final YJHttpManager httpManager = YJHttpManager();
 
 class YJHttpManager {
@@ -44,6 +49,7 @@ class YJHttpManager {
           e.type == DioExceptionType.receiveTimeout) {
         errorResponse!.statusCode = Code.NETWORK_TIMEOUT;
       }
+      debugPrint("请求失败: ${e.message}");
       return ResultData(e.message, false, errorResponse?.statusCode);
     }
 
