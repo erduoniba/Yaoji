@@ -3,6 +3,7 @@ import 'package:yaoji/common/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:yaoji/common/widgets/list_header.dart';
+import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:yaoji/pages/home/requests/home_data.dart';
 
 class YJHomePage extends StatefulWidget {
@@ -32,7 +33,9 @@ class _YJHomePageState extends State<YJHomePage> {
   }
 
   request() {
-    HomeData.getHomeAdvData();
+    HomeData.getHomeAdvData().then((res) {
+      print((res as AdvModel).description());
+    });
   }
 
   Widget homeListView() {

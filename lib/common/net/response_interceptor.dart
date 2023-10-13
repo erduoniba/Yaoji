@@ -26,6 +26,7 @@ class ResponseInterceptors extends InterceptorsWrapper {
         );
       }
     } catch (e) {
+      print("请求失败了：");
       print(e.toString() + options.path);
       value = ResultData(
         response.data,

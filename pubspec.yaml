@@ -1,3 +1,5 @@
+# flutter pub get 进行更新
+
 name: yaoji
 description: A new Flutter project.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -16,11 +18,16 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  # flutter gen-l10n
+  # 多语言 flutter gen-l10n
   intl: any
+  # 下拉刷新、加载更多
   easy_refresh: ^3.3.2+1
+  # 网络请求
   dio: ^5.3.3
+  # json数据和模型转换
+  json_annotation: ^4.8.1
 
+# dev 依赖 是不包括在我们的 App 源代码中的依赖——它们只会被用在开发环境中
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -31,6 +38,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  # 生成 JSON 序列化代码
+  json_serializable: ^6.7.1
+  # 和 json_serializable 一起使用，自动生成代码
+  build_runner: ^2.3.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
