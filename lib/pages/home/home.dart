@@ -5,6 +5,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:yaoji/common/widgets/list_header.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:yaoji/pages/home/requests/home_request.dart';
+import 'package:yaoji/pages/home/widgets/home_adview.dart';
 
 class YJHomePage extends StatefulWidget {
   const YJHomePage({super.key});
@@ -14,9 +15,8 @@ class YJHomePage extends StatefulWidget {
 }
 
 class _YJHomePageState extends State<YJHomePage> {
-  int _count = 10;
   late EasyRefreshController _controller;
-  late AdvModel _advModel;
+  late String _advImgUrl;
   late List<HistoryItem> _list = [];
   late int _pageNum = 1;
 
@@ -37,14 +37,25 @@ class _YJHomePageState extends State<YJHomePage> {
 
   _refreshData() {
     _pageNum = 1;
+    _list.clear();
+    _advImgUrl = "";
     HomeData.getHomeAdvData().then((res) {
-      if (res is AdvModel) {
-        _advModel = res;
+      if ((res is AdvModel) &&
+          res.list.isNotEmpty &&
+          res.list.first.coverImg != null) {
+        setState(() {
+          _advImgUrl = res.list.first.coverImg!;
+        });
+        _controller.finishRefresh();
       }
     });
     HomeData.getHomeListData().then((res) {
       if (res is HistoryModel) {
-        _list = res.list;
+        setState(() {
+          _list = res.list;
+        });
+        _controller.finishRefresh();
+        _controller.resetFooter();
         debugPrint(res.description());
       }
     });
@@ -55,7 +66,14 @@ class _YJHomePageState extends State<YJHomePage> {
     HomeData.getHomeListData(page_num: _pageNum).then((res) {
       if (res is HistoryModel) {
         debugPrint(res.description());
-        _list.addAll(res.list);
+        setState(() {
+          _list.addAll(res.list);
+        });
+        if (res.list.length < 10) {
+          _controller.finishLoad(IndicatorResult.noMore);
+        } else {
+          _controller.finishLoad(IndicatorResult.success);
+        }
       }
     });
   }
@@ -66,36 +84,16 @@ class _YJHomePageState extends State<YJHomePage> {
       header: YJListHeader.listHeader(),
       footer: YJListHeader.listFooter(),
       onRefresh: () async {
-        await Future.delayed(Duration(seconds: 1));
-        if (!mounted) {
-          return;
-        }
-        setState(() {
-          _count = 10;
-        });
-        _controller.finishRefresh();
-        _controller.resetFooter();
-
         _refreshData();
       },
       onLoad: () async {
-        await Future.delayed(Duration(seconds: 1));
-        if (!mounted) {
-          return;
-        }
         _loadMoreData();
-
-        setState(() {
-          _count += 6;
-        });
-        if (_list.length > 100) {
-          _controller.finishLoad(IndicatorResult.noMore);
-        } else {
-          _controller.finishLoad(IndicatorResult.success);
-        }
       },
       child: ListView.builder(
         itemBuilder: (context, index) {
+          if (index == 0 && _advImgUrl.isNotEmpty) {
+            return HomeAdvView(imgUrl: _advImgUrl);
+          }
           return Card(
             child: Container(
               alignment: Alignment.center,
@@ -104,7 +102,7 @@ class _YJHomePageState extends State<YJHomePage> {
             ),
           );
         },
-        itemCount: _count,
+        itemCount: _list.length,
       ),
     );
   }

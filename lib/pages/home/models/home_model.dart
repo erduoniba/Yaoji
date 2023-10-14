@@ -44,6 +44,20 @@ class AdvModel {
   }
 }
 
+/*
+{
+    "brief": "驮着河图出现的龙马，高八尺五寸，长颈，骼上有翼，旁有垂尾，蹈水不没。",
+    "category": 4,
+    "cover_img": "https://file.cbaigui.com/img/1626361307320076277.JPG",
+    "date": "2023-03-17",
+    "date_nl": "二月廿六",
+    "date_normal": "3月17日",
+    "date_traditional": "",
+    "date_year": "癸卯",
+    "id": 498,
+    "title": "龙马"
+}
+*/
 // 首页列表数据
 @JsonSerializable()
 class HistoryItem {
