@@ -26,6 +26,8 @@ dependencies:
   dio: ^5.3.3
   # json数据和模型转换
   json_annotation: ^4.8.1
+  # 网络图片缓存组件
+  cached_network_image: ^3.3.0
 
 # dev 依赖 是不包括在我们的 App 源代码中的依赖——它们只会被用在开发环境中
 dev_dependencies:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeTodayWidget extends StatelessWidget {
   late HistoryItem todayItem;
@@ -36,8 +37,8 @@ class HomeTodayWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            todayItem.coverImg!,
+          CachedNetworkImage(
+            imageUrl: todayItem.coverImg ?? "",
             height: 200,
             width: double.infinity,
             fit: BoxFit.cover,
