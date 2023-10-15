@@ -7,7 +7,7 @@ final class HomeAdvView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 120,
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+      padding: const EdgeInsets.only(left: 16, right: 16),
       child: Image.network(imgUrl),
     );
   }

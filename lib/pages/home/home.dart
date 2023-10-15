@@ -6,6 +6,7 @@ import 'package:yaoji/common/widgets/list_header.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:yaoji/pages/home/requests/home_request.dart';
 import 'package:yaoji/pages/home/widgets/home_adview.dart';
+import 'package:yaoji/pages/home/widgets/home_today.dart';
 
 class YJHomePage extends StatefulWidget {
   const YJHomePage({super.key});
@@ -27,6 +28,7 @@ class _YJHomePageState extends State<YJHomePage> {
       controlFinishLoad: true,
       controlFinishRefresh: true,
     );
+    _refreshData();
   }
 
   @override
@@ -93,6 +95,10 @@ class _YJHomePageState extends State<YJHomePage> {
         itemBuilder: (context, index) {
           if (index == 0 && _advImgUrl.isNotEmpty) {
             return HomeAdvView(imgUrl: _advImgUrl);
+          } else if (index == 1) {
+            return HomeTodayWidget(
+              todayItem: _list.first,
+            );
           }
           return Card(
             child: Container(
@@ -121,6 +127,7 @@ class _YJHomePageState extends State<YJHomePage> {
       ),
       // body: homeListView(),
       body: _homeListView(),
+      backgroundColor: Colors.grey[200],
     );
   }
 
