@@ -18,9 +18,11 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
   int _currentIndex = 0;
   final List<Widget> _pageList = [
     const YJHomePage(),
-    YJYaoboPage(),
+    const YJYaoboPage(),
     const YJSouyaoPage(),
-    const YJLoushiPage()
+    const YJLoushiPage(
+      id: '',
+    )
   ];
 
   List<BottomNavigationBarItem> _tabbarItemList() {

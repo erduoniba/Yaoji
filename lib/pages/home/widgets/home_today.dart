@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:yaoji/pages/home/models/home_model.dart';
 
 final class HomeTodayWidget extends StatelessWidget {
   final HistoryItem todayItem;
 
-  const HomeTodayWidget({super.key, required this.todayItem});
+  const HomeTodayWidget({
+    super.key,
+    required this.todayItem,
+  });
 
-  Widget _titleWidget() {
-    return const Row(
+  _gotoPerson(BuildContext context) {
+    print('_gotoPerson');
+    context.go("/pages/loushi");
+  }
+
+  Widget _titleWidget(BuildContext context) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
+        const Text(
           "今日推荐",
           style: TextStyle(
             color: Colors.black,
@@ -19,7 +29,12 @@ final class HomeTodayWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Icon(Icons.person),
+        IconButton(
+          onPressed: () {
+            _gotoPerson(context);
+          },
+          icon: const Icon(Icons.person),
+        ),
       ],
     );
   }
@@ -75,7 +90,7 @@ final class HomeTodayWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: Column(
         children: [
-          _titleWidget(),
+          _titleWidget(context),
           _contentWidget(),
         ],
       ),

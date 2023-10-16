@@ -28,6 +28,8 @@ dependencies:
   json_annotation: ^4.8.1
   # 网络图片缓存组件
   cached_network_image: ^3.3.0
+  # 页面跳转（路由）相关组件
+  go_router: ^11.1.4
 
 # dev 依赖 是不包括在我们的 App 源代码中的依赖——它们只会被用在开发环境中
 dev_dependencies:
