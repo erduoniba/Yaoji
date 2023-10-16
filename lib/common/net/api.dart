@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +46,7 @@ class YJHttpManager {
       if (e.type == DioExceptionType.connectionTimeout ||
           e.type == DioExceptionType.sendTimeout ||
           e.type == DioExceptionType.receiveTimeout) {
-        errorResponse!.statusCode = Code.NETWORK_TIMEOUT;
+        errorResponse!.statusCode = Code.networkTimeout;
       }
       debugPrint("请求失败: ${e.message}");
       return ResultData(e.message, false, errorResponse?.statusCode);

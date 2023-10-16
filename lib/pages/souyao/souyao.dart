@@ -3,6 +3,7 @@ import 'package:yaoji/common/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class YJSouyaoPage extends StatefulWidget {
+  const YJSouyaoPage({super.key});
   @override
   State<StatefulWidget> createState() => _YJSouyaoPageState();
 }

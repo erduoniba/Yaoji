@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:yaoji/common/net/result_data.dart';
 import 'package:yaoji/common/net/net_code.dart';
 
@@ -14,20 +15,20 @@ class ResponseInterceptors extends InterceptorsWrapper {
         value = ResultData(
           response.data,
           true,
-          Code.SUCCESS,
+          Code.success,
           headers: response.headers,
         );
       } else if (response.statusCode! >= 200 && response.statusCode! < 300) {
         value = ResultData(
           response.data,
           true,
-          Code.SUCCESS,
+          Code.success,
           headers: response.headers,
         );
       }
     } catch (e) {
-      print("请求失败了：");
-      print(e.toString() + options.path);
+      debugPrint("请求失败了：");
+      debugPrint(e.toString() + options.path);
       value = ResultData(
         response.data,
         false,

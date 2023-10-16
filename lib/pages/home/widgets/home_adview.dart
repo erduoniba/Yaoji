@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 final class HomeAdvView extends StatelessWidget {
-  HomeAdvView({super.key, required this.imgUrl});
-  late String imgUrl;
+  const HomeAdvView({super.key, required this.imgUrl});
+  final String imgUrl;
   @override
   Widget build(BuildContext context) {
     return Container(

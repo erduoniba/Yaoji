@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:yaoji/common/net/api.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
 
@@ -24,8 +23,8 @@ class HomeData {
     return model;
   }
 
-  static getHomeListData({int page_num = 1}) async {
-    final params = {"page_size": 10, "page_num": page_num};
+  static getHomeListData({int pageNum = 1}) async {
+    final params = {"page_size": 10, "page_num": pageNum};
     final response = await httpManager.netFetch("home/history", params, null);
     if (response?.result == false) {
       return null;

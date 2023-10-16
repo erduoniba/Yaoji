@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yaoji/common/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:yaoji/common/widgets/list_header.dart';
@@ -65,7 +64,7 @@ class _YJHomePageState extends State<YJHomePage> {
 
   _loadMoreData() {
     _pageNum++;
-    HomeData.getHomeListData(page_num: _pageNum).then((res) {
+    HomeData.getHomeListData(pageNum: _pageNum).then((res) {
       if (res is HistoryModel) {
         debugPrint(res.description());
         setState(() {

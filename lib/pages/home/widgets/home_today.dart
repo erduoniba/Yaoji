@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class HomeTodayWidget extends StatelessWidget {
-  late HistoryItem todayItem;
+final class HomeTodayWidget extends StatelessWidget {
+  final HistoryItem todayItem;
 
-  HomeTodayWidget({super.key, required this.todayItem});
+  const HomeTodayWidget({super.key, required this.todayItem});
 
   Widget _titleWidget() {
     return const Row(
