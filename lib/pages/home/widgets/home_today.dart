@@ -13,8 +13,10 @@ final class HomeTodayWidget extends StatelessWidget {
   });
 
   _gotoPerson(BuildContext context) {
-    print('_gotoPerson');
-    context.go("/pages/loushi");
+    context.go(Uri(
+      path: "/pages/home/pages/loushi",
+      queryParameters: {"id": "100"},
+    ).toString());
   }
 
   Widget _titleWidget(BuildContext context) {

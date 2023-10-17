@@ -20,9 +20,7 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
     const YJHomePage(),
     const YJYaoboPage(),
     const YJSouyaoPage(),
-    const YJLoushiPage(
-      id: '',
-    )
+    const YJLoushiPage(id: ''),
   ];
 
   List<BottomNavigationBarItem> _tabbarItemList() {

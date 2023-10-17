@@ -13,7 +13,7 @@ class _YJLoushiPageState extends State<YJLoushiPage> {
   @override
   void initState() {
     super.initState();
-    debugPrint(widget.id);
+    debugPrint("personid: ${widget.id}");
   }
 
   @override

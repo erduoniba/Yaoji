@@ -20,6 +20,16 @@ final GoRouter yjRoute = GoRouter(
       builder: (context, state) {
         return const YJHomePage();
       },
+      routes: [
+        GoRoute(
+          name: 'loushi_',
+          path: 'pages/loushi',
+          builder: (context, GoRouterState state) {
+            String id = state.pathParameters['id'] ?? "";
+            return YJLoushiPage(id: id);
+          },
+        )
+      ],
     ),
     GoRoute(
       path: '/pages/yaobo',
