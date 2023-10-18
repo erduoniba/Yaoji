@@ -122,9 +122,7 @@ extension _YJHomePageStateView on _YJHomePageState {
           if (index == 0 && _advImgUrl.isNotEmpty) {
             return HomeAdvView(imgUrl: _advImgUrl);
           } else if (index == 1) {
-            return HomeTodayWidget(
-              todayItem: _list.first,
-            );
+            return HomeTodayWidget(todayItem: _list.first);
           }
           return Card(
             child: Container(
