@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yaoji/pages/home/home.dart';
 import 'package:yaoji/pages/yaobo/yaobo.dart';
@@ -23,9 +24,9 @@ final GoRouter yjRoute = GoRouter(
       routes: [
         GoRoute(
           name: 'loushi_',
-          path: 'pages/loushi',
+          path: 'loushi/:pid',
           builder: (context, GoRouterState state) {
-            String id = state.pathParameters['id'] ?? "";
+            String id = state.pathParameters['pid'] ?? "";
             return YJLoushiPage(id: id);
           },
         )

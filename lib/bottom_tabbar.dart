@@ -4,6 +4,7 @@ import 'pages/home/home.dart';
 import 'pages/yaobo/yaobo.dart';
 import 'pages/souyao/souyao.dart';
 import 'pages/loushi/loushi.dart';
+import 'common/notification/notifcation.dart';
 
 class YJBottomTabbar extends StatefulWidget {
   const YJBottomTabbar({super.key});
@@ -85,9 +86,20 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       // body: _pageList[_currentIndex],
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _pageList,
+      // 实现保持页面状态，不会重复初始化_pageList
+      body: NotificationListener<YJTabarNotification>(
+        onNotification: (Notification notification) {
+          if (notification is YJTabarNotification) {
+            setState(() {
+              _currentIndex = notification.tabbarIndex;
+            });
+          }
+          return true;
+        },
+        child: IndexedStack(
+          index: _currentIndex,
+          children: _pageList,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
