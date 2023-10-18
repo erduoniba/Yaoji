@@ -6,6 +6,7 @@ import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:yaoji/pages/home/requests/home_request.dart';
 import 'package:yaoji/pages/home/widgets/home_adview.dart';
 import 'package:yaoji/pages/home/widgets/home_today.dart';
+import 'package:yaoji/pages/home/widgets/home_list.dart';
 
 class YJHomePage extends StatefulWidget {
   const YJHomePage({super.key});
@@ -19,6 +20,8 @@ class _YJHomePageState extends State<YJHomePage> {
   late String _advImgUrl;
   late List<HistoryItem> _list = [];
   late int _pageNum = 1;
+  // 最后一条数据的归属日期，用于列表按照同一天进行展示
+  late String _lastDate = "";
 
   @override
   void initState() {
@@ -75,11 +78,10 @@ extension _YJHomePageStateRequest on _YJHomePageState {
         _controller.finishRefresh();
       }
     });
+
     HomeData.getHomeListData().then((res) {
       if (res is HistoryModel) {
-        extensionSetState(() {
-          _list = res.list;
-        });
+        _combineData(res.list, refresh: true);
         _controller.finishRefresh();
         _controller.resetFooter();
         debugPrint(res.description());
@@ -92,15 +94,43 @@ extension _YJHomePageStateRequest on _YJHomePageState {
     HomeData.getHomeListData(pageNum: _pageNum).then((res) {
       if (res is HistoryModel) {
         debugPrint(res.description());
-        extensionSetState(() {
-          _list.addAll(res.list);
-        });
+        _combineData(res.list, refresh: false);
         if (res.list.length < 10) {
           _controller.finishLoad(IndicatorResult.noMore);
         } else {
           _controller.finishLoad(IndicatorResult.success);
         }
       }
+    });
+  }
+
+  _combineData(List<HistoryItem> list, {bool refresh = false}) {
+    // 少于两条数据，并且是刷新情况下，直接作为今日推荐数据
+    if (list.length < 2 && refresh) {
+      extensionSetState(() => _list = list);
+      return;
+    }
+
+    if (refresh) {
+      _list.clear();
+    }
+    List<HistoryItem> tempList = _list;
+    for (int i = 0; i < list.length; i++) {
+      HistoryItem item = list[i];
+      if (refresh && i == 0) {
+        // 下拉刷新，第一条数据被今日推荐使用
+        tempList.add(item);
+        continue;
+      }
+
+      if (item.dateNormal != _lastDate) {
+        item.showDate = item.dateNormal;
+        _lastDate = item.dateNormal ?? "";
+      }
+      tempList.add(item);
+    }
+    extensionSetState(() {
+      _list = tempList;
     });
   }
 }
@@ -124,13 +154,7 @@ extension _YJHomePageStateView on _YJHomePageState {
           } else if (index == 1) {
             return HomeTodayWidget(todayItem: _list.first);
           }
-          return Card(
-            child: Container(
-              alignment: Alignment.center,
-              height: 80,
-              child: Text('index: ($index + 1)'),
-            ),
-          );
+          return HomeHistoryView(historyItem: _list[index]);
         },
         itemCount: _list.length,
       ),

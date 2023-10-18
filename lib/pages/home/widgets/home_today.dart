@@ -66,7 +66,7 @@ final class HomeTodayWidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(6),
       ),
       // clipsToBounds 相似能力
       clipBehavior: Clip.antiAlias,
