@@ -82,6 +82,8 @@ class HistoryItem {
   int id;
   String? title;
 
+  String? showDate;
+
   HistoryItem(
     this.coverImg,
     this.brief,

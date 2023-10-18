@@ -36,6 +36,31 @@ class _YJHomePageState extends State<YJHomePage> {
     super.dispose();
   }
 
+  // 回调函数：将方法作为参数进行传递，然后执行
+  void extensionSetState(Function() callback) {
+    setState(callback);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          local!.home,
+          style: const TextStyle(
+            fontSize: 18,
+          ),
+        ),
+      ),
+      // body: homeListView(),
+      body: _homeListView(),
+      backgroundColor: Colors.grey[200],
+    );
+  }
+}
+
+extension _YJHomePageStateRequest on _YJHomePageState {
   _refreshData() {
     _pageNum = 1;
     _list.clear();
@@ -44,7 +69,7 @@ class _YJHomePageState extends State<YJHomePage> {
       if ((res is AdvModel) &&
           res.list.isNotEmpty &&
           res.list.first.coverImg != null) {
-        setState(() {
+        extensionSetState(() {
           _advImgUrl = res.list.first.coverImg!;
         });
         _controller.finishRefresh();
@@ -52,7 +77,7 @@ class _YJHomePageState extends State<YJHomePage> {
     });
     HomeData.getHomeListData().then((res) {
       if (res is HistoryModel) {
-        setState(() {
+        extensionSetState(() {
           _list = res.list;
         });
         _controller.finishRefresh();
@@ -67,7 +92,7 @@ class _YJHomePageState extends State<YJHomePage> {
     HomeData.getHomeListData(pageNum: _pageNum).then((res) {
       if (res is HistoryModel) {
         debugPrint(res.description());
-        setState(() {
+        extensionSetState(() {
           _list.addAll(res.list);
         });
         if (res.list.length < 10) {
@@ -78,7 +103,9 @@ class _YJHomePageState extends State<YJHomePage> {
       }
     });
   }
+}
 
+extension _YJHomePageStateView on _YJHomePageState {
   Widget _homeListView() {
     return EasyRefresh(
       controller: _controller,
@@ -108,36 +135,6 @@ class _YJHomePageState extends State<YJHomePage> {
           );
         },
         itemCount: _list.length,
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final local = AppLocalizations.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          local!.home,
-          style: const TextStyle(
-            fontSize: 18,
-          ),
-        ),
-      ),
-      // body: homeListView(),
-      body: _homeListView(),
-      backgroundColor: Colors.grey[200],
-    );
-  }
-
-  Widget testView() {
-    return Container(
-      alignment: Alignment.center,
-      child: TextButton(
-        child: const Text('request'),
-        onPressed: () {
-          _refreshData();
-        },
       ),
     );
   }
