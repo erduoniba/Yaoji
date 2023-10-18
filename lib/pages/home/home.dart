@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
 import 'package:yaoji/common/widgets/list_header.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:yaoji/pages/home/requests/home_request.dart';
@@ -22,6 +24,7 @@ class _YJHomePageState extends State<YJHomePage> {
   late int _pageNum = 1;
   // 最后一条数据的归属日期，用于列表按照同一天进行展示
   late String _lastDate = "";
+  late bool _loading = true;
 
   @override
   void initState() {
@@ -56,8 +59,11 @@ class _YJHomePageState extends State<YJHomePage> {
           ),
         ),
       ),
-      // body: homeListView(),
-      body: _homeListView(),
+      body: Skeletonizer(
+        enabled: _loading,
+        child: _homeListView(),
+      ),
+      // body: _homeListView(),
       backgroundColor: Colors.grey[200],
     );
   }
@@ -65,6 +71,9 @@ class _YJHomePageState extends State<YJHomePage> {
 
 extension _YJHomePageStateRequest on _YJHomePageState {
   _refreshData() {
+    extensionSetState(() {
+      _loading = true;
+    });
     _pageNum = 1;
     _list.clear();
     _advImgUrl = "";
@@ -74,6 +83,7 @@ extension _YJHomePageStateRequest on _YJHomePageState {
           res.list.first.coverImg != null) {
         extensionSetState(() {
           _advImgUrl = res.list.first.coverImg!;
+          _loading = false;
         });
         _controller.finishRefresh();
       }
@@ -84,7 +94,6 @@ extension _YJHomePageStateRequest on _YJHomePageState {
         _combineData(res.list, refresh: true);
         _controller.finishRefresh();
         _controller.resetFooter();
-        debugPrint(res.description());
       }
     });
   }
