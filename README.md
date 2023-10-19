@@ -27,9 +27,13 @@ flutter pub add packagname
 
 flutter gen-l10n
 
-<!-- 执行后，可以自动生成json转成的model代码 -->
+<!-- 执行后，可以自动生成json转成的model代码，持续观察持续生成 -->
 
 flutter pub run build_runner watch
+
+<!-- 执行后，可以自动生成json转成的model代码，执行后，遍历文件然后执行 -->
+
+flutter pub run build_runner build --delete-conflicting-outputs
 
 <!-- 常用的第三方package -->
 

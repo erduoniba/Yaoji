@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 // import 'package:go_router/go_router.dart';
 
 import 'package:yaoji/pages/home/models/home_model.dart';
@@ -105,6 +106,15 @@ final class HomeTodayWidget extends StatelessWidget {
     );
   }
 
+  Widget _contentActionView(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.push("/pages/detail/${todayItem.id}");
+      },
+      child: _contentWidget(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -113,7 +123,7 @@ final class HomeTodayWidget extends StatelessWidget {
       child: Column(
         children: [
           _titleWidget(context),
-          _contentWidget(),
+          _contentActionView(context),
         ],
       ),
     );
