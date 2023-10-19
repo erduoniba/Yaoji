@@ -11,6 +11,7 @@ ProductItem _$ProductItemFromJson(Map<String, dynamic> json) => ProductItem(
       json['content'] as String?,
       json['category'] as int?,
       json['date'] as String?,
+      json['title'] as String?,
     );
 
 Map<String, dynamic> _$ProductItemToJson(ProductItem instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$ProductItemToJson(ProductItem instance) =>
       'content': instance.content,
       'category': instance.category,
       'date': instance.date,
+      'title': instance.title,
     };

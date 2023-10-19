@@ -30,3 +30,7 @@ flutter gen-l10n
 <!-- 执行后，可以自动生成json转成的model代码 -->
 
 flutter pub run build_runner watch
+
+<!-- 常用的第三方package -->
+
+https://cloud.tencent.com/developer/article/2020032?cps_key=1d358d18a7a17b4a6df8d67a62fd3d3d

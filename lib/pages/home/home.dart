@@ -19,8 +19,7 @@ class YJHomePage extends StatefulWidget {
 
 class _YJHomePageState extends State<YJHomePage> {
   late EasyRefreshController _controller;
-  late String _advImgUrl;
-  late String _adId;
+  late AdvModel _advModel = AdvModel([]);
   late List<HistoryItem> _list = [];
   late int _pageNum = 1;
   // 最后一条数据的归属日期，用于列表按照同一天进行展示
@@ -77,15 +76,13 @@ extension _YJHomePageStateRequest on _YJHomePageState {
     });
     _pageNum = 1;
     _list.clear();
-    _advImgUrl = "";
     HomeData.getHomeAdvData().then((res) {
       if ((res is AdvModel) &&
           res.list.isNotEmpty &&
           res.list.first.coverImg != null) {
-        _adId = res.list.first.id.toString();
         extensionSetState(() {
-          _advImgUrl = res.list.first.coverImg!;
           _loading = false;
+          _advModel = res;
         });
         _controller.finishRefresh();
       }
@@ -160,18 +157,23 @@ extension _YJHomePageStateView on _YJHomePageState {
       },
       child: ListView.builder(
         itemBuilder: (context, index) {
-          if (index == 0 && _advImgUrl.isNotEmpty) {
-            return HomeAdvView(
-              imgUrl: _advImgUrl,
-              id: _adId,
-            );
+          if (index == 0 && _advModel.list.isNotEmpty) {
+            return HomeAdvView(advModel: _advModel);
           } else if (index == 1) {
             return HomeTodayWidget(todayItem: _list.first);
           }
           return HomeHistoryView(historyItem: _list[index]);
         },
-        itemCount: _list.length,
+        itemCount: itemCount(),
       ),
     );
+  }
+
+  int itemCount() {
+    int count = _list.length;
+    if (_advModel.list.isNotEmpty) {
+      count++;
+    }
+    return count;
   }
 }

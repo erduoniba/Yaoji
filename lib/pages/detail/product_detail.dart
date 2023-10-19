@@ -16,6 +16,7 @@ final class YJProductDetailPage extends StatefulWidget {
 
 final class _YJProductDetailState extends State<YJProductDetailPage> {
   late String? _data = "<p>";
+  late String _title = "妖记";
 
   @override
   void initState() {
@@ -30,6 +31,9 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
       if (item is ProductItem) {
         setState(() {
           _data = item.content;
+          if (item.title != null) {
+            _title = item.title!;
+          }
         });
       }
       EasyLoading.dismiss();
@@ -40,9 +44,9 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "妖记",
-          style: TextStyle(
+        title: Text(
+          _title,
+          style: const TextStyle(
             fontSize: 18,
           ),
         ),

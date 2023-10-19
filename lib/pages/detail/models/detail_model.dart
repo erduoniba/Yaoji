@@ -12,12 +12,14 @@ class ProductItem {
   String? content;
   int? category;
   String? date;
+  String? title;
 
   ProductItem(
     this.coverImg,
     this.content,
     this.category,
     this.date,
+    this.title,
   );
 
   factory ProductItem.fromJson(Map<String, dynamic> json) =>

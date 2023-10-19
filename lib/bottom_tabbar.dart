@@ -5,6 +5,7 @@ import 'pages/yaobo/yaobo.dart';
 import 'pages/souyao/souyao.dart';
 import 'pages/loushi/loushi.dart';
 import 'common/notification/notifcation.dart';
+import 'common/colors.dart';
 
 class YJBottomTabbar extends StatefulWidget {
   const YJBottomTabbar({super.key});
@@ -103,7 +104,7 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        selectedItemColor: const Color(0xFFA88B4E),
+        selectedItemColor: YJColor.themeColor(),
         unselectedItemColor: Colors.grey,
         selectedFontSize: 14,
         unselectedFontSize: 14,

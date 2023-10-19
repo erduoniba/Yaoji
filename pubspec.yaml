@@ -36,6 +36,8 @@ dependencies:
   flutter_html: ^3.0.0-beta.2
   # loading和toast库
   flutter_easyloading: ^3.0.5
+  # 轮播库
+  card_swiper: ^3.0.1
 
 # dev 依赖 是不包括在我们的 App 源代码中的依赖——它们只会被用在开发环境中
 dev_dependencies:
