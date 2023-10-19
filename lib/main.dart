@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:yaoji/common/router/router.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: const YJBottomTabbar(),
       routerConfig: yjRoute,
+      builder: EasyLoading.init(),
     );
   }
 }

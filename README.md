@@ -14,3 +14,19 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+<!-- 查看package的依赖关系 -->
+
+pub deps > deps.yaml
+
+<!-- 添加第三方package -->
+
+flutter pub add packagname
+
+<!-- 自动生成多语言代码 -->
+
+flutter gen-l10n
+
+<!-- 执行后，可以自动生成json转成的model代码 -->
+
+flutter pub run build_runner watch

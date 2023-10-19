@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 // 该文件中还有部分独立的代码实现在 home_model.g.dart 中
 // home_model.g.dart 代码是通过在开发环境下 json_serializable 和
 // build_runner 自动生成的
+// 必须先填写如下代码，才可以自动生成对应的代码文件
 part 'home_model.g.dart';
 
 // 首页广告数据

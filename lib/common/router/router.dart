@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yaoji/pages/home/home.dart';
 import 'package:yaoji/pages/yaobo/yaobo.dart';
 import 'package:yaoji/pages/souyao/souyao.dart';
 import 'package:yaoji/pages/loushi/loushi.dart';
+import 'package:yaoji/pages/detail/product_detail.dart';
 import 'package:yaoji/bottom_tabbar.dart';
 
 final GoRouter yjRoute = GoRouter(
@@ -50,6 +50,15 @@ final GoRouter yjRoute = GoRouter(
       builder: (context, GoRouterState state) {
         String id = state.pathParameters['id'] ?? "";
         return YJLoushiPage(id: id);
+      },
+    ),
+    GoRoute(
+      name: 'detail',
+      path: '/pages/detail/:id',
+      builder: (context, state) {
+        String sid = state.pathParameters['id'] ?? "";
+        int id = int.tryParse(sid) ?? 0;
+        return YJProductDetailPage(id: id);
       },
     ),
   ],

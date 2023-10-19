@@ -54,7 +54,7 @@ class YJHttpManager {
 
     Response response;
     try {
-      debugPrint('url: $url. params: $params');
+      debugPrint('url: $url params: $params');
       response = await _dio.request(url, data: params, options: options);
     } on DioException catch (e) {
       return resultError(e);

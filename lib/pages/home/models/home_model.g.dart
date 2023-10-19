@@ -39,7 +39,7 @@ HistoryItem _$HistoryItemFromJson(Map<String, dynamic> json) => HistoryItem(
       json['date_year'] as String?,
       json['id'] as int,
       json['title'] as String?,
-    );
+    )..showDate = json['showDate'] as String?;
 
 Map<String, dynamic> _$HistoryItemToJson(HistoryItem instance) =>
     <String, dynamic>{
@@ -53,6 +53,7 @@ Map<String, dynamic> _$HistoryItemToJson(HistoryItem instance) =>
       'date_year': instance.dateYear,
       'id': instance.id,
       'title': instance.title,
+      'showDate': instance.showDate,
     };
 
 HistoryModel _$HistoryModelFromJson(Map<String, dynamic> json) => HistoryModel(

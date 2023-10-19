@@ -32,6 +32,10 @@ dependencies:
   go_router: ^11.1.4
   # 骨架加载loading库
   skeletonizer: ^0.8.0
+  # 解析 HTML 的库，它支持解析 HTML 中的大部分标签和属性
+  flutter_html: ^3.0.0-beta.2
+  # loading和toast库
+  flutter_easyloading: ^3.0.5
 
 # dev 依赖 是不包括在我们的 App 源代码中的依赖——它们只会被用在开发环境中
 dev_dependencies:
@@ -46,7 +50,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   # 生成 JSON 序列化代码
   json_serializable: ^6.7.1
-  # 和 json_serializable 一起使用，自动生成代码
+  # 和 json_serializable 一起使用，自动生成代码 flutter pub run build_runner watch
   build_runner: ^2.3.3
 
 # For information on the generic Dart part of this file, see the
