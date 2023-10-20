@@ -17,7 +17,7 @@ class YJColor {
   }
 
   static Color tipColor() {
-    return Colors.black12;
+    return Colors.black45;
   }
 
   static Color titleColor() {
@@ -25,6 +25,6 @@ class YJColor {
   }
 
   static Color contentColor() {
-    return Colors.black54;
+    return Colors.black87;
   }
 }

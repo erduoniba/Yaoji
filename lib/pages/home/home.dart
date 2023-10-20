@@ -161,6 +161,10 @@ extension _YJHomePageStateView on _YJHomePageState {
           } else if (index == 1) {
             return HomeTodayWidget(todayItem: _list.first);
           }
+
+          if (_advModel.list.isNotEmpty) {
+            return HomeHistoryView(historyItem: _list[index - 1]);
+          }
           return HomeHistoryView(historyItem: _list[index]);
         },
         itemCount: itemCount(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:yaoji/common/constant.dart';
 import 'pages/home/home.dart';
 import 'pages/yaobo/yaobo.dart';
 import 'pages/souyao/souyao.dart';
@@ -106,8 +107,8 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
         currentIndex: _currentIndex,
         selectedItemColor: YJColor.themeColor(),
         unselectedItemColor: Colors.grey,
-        selectedFontSize: 14,
-        unselectedFontSize: 14,
+        selectedFontSize: YJConstant.contentFontSize,
+        unselectedFontSize: YJConstant.contentFontSize,
         onTap: (value) {
           setState(() {
             _currentIndex = value;

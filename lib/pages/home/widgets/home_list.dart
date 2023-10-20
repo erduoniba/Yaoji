@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yaoji/common/constant.dart';
 
 final class HomeHistoryView extends StatelessWidget {
@@ -9,9 +10,7 @@ final class HomeHistoryView extends StatelessWidget {
 
   Widget _dateWidget() {
     if (historyItem.showDate == null || historyItem.showDate!.isEmpty) {
-      return Container(
-        height: 0,
-      );
+      return Container();
     }
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 12),
@@ -72,6 +71,15 @@ final class HomeHistoryView extends StatelessWidget {
     );
   }
 
+  Widget _contentActionWidget(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.push("/pages/detail/${historyItem.id}");
+      },
+      child: _contentWidget(context),
+    );
+  }
+
   Widget _badgeWidget() {
     return Container(
       width: 40,
@@ -102,7 +110,7 @@ final class HomeHistoryView extends StatelessWidget {
           _dateWidget(),
           Stack(
             children: [
-              _contentWidget(context),
+              _contentActionWidget(context),
               Positioned(
                 top: 0,
                 right: 0,

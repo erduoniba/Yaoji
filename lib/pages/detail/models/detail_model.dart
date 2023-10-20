@@ -42,6 +42,8 @@ class ProductItem {
   int? collectNum;
   @JsonKey(name: "comment_num")
   int? commentNum;
+  @JsonKey(name: "content_img")
+  String? contentImg;
   String? content;
   String? date;
   String? introduction;
@@ -52,6 +54,8 @@ class ProductItem {
   int? nextArticleId;
   @JsonKey(name: "next_article_title")
   String? nextArticleTitle;
+  @JsonKey(name: "pic_author")
+  String? picAuthor;
 
   List<String>? tags;
   String? title;
@@ -63,12 +67,14 @@ class ProductItem {
     this.category,
     this.collectNum,
     this.commentNum,
+    this.contentImg,
     this.content,
     this.date,
     this.introduction,
     this.likeNum,
     this.nextArticleId,
     this.nextArticleTitle,
+    this.picAuthor,
     this.tags,
     this.title,
   );

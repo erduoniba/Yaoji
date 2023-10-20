@@ -100,8 +100,8 @@ final class HomeTodayWidget extends StatelessWidget {
             ),
             child: Text(
               todayItem.brief ?? "",
-              style: const TextStyle(
-                fontSize: 14,
+              style: TextStyle(
+                fontSize: YJConstant.contentFontSize,
                 color: Colors.black54,
               ),
             ),
