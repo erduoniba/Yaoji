@@ -76,6 +76,12 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () {
+          print("x");
+        },
+      ),
     );
   }
 
