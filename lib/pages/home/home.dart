@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:yaoji/common/constant.dart';
 
 import 'package:yaoji/common/widgets/list_header.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
@@ -54,9 +55,7 @@ class _YJHomePageState extends State<YJHomePage> {
       appBar: AppBar(
         title: Text(
           local!.home,
-          style: const TextStyle(
-            fontSize: 18,
-          ),
+          style: TextStyle(fontSize: YJConstant.titleFontSize),
         ),
       ),
       body: Skeletonizer(

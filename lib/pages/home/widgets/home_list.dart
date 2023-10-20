@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:yaoji/common/constant.dart';
 
 final class HomeHistoryView extends StatelessWidget {
   final HistoryItem historyItem;
@@ -28,10 +29,15 @@ final class HomeHistoryView extends StatelessWidget {
       height: 92,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: YJConstant.borderRadius,
       ),
       clipBehavior: Clip.antiAlias,
-      padding: const EdgeInsets.fromLTRB(16, 16, 10, 16),
+      padding: EdgeInsets.fromLTRB(
+        YJConstant.padding,
+        YJConstant.padding,
+        10,
+        YJConstant.padding,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -72,9 +78,9 @@ final class HomeHistoryView extends StatelessWidget {
       height: 20,
       decoration: BoxDecoration(
         color: Colors.blue[100],
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(6),
-          topRight: Radius.circular(6),
+        borderRadius: BorderRadius.only(
+          bottomLeft: YJConstant.radius,
+          topRight: YJConstant.radius,
         ),
       ),
       child: Text(
@@ -88,8 +94,9 @@ final class HomeHistoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.only(left: 16, right: 16),
+      margin: EdgeInsets.only(bottom: YJConstant.padding),
+      padding:
+          EdgeInsets.only(left: YJConstant.padding, right: YJConstant.padding),
       child: Column(
         children: [
           _dateWidget(),

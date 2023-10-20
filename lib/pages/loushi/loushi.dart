@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaoji/common/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:yaoji/common/constant.dart';
 
 class YJLoushiPage extends StatefulWidget {
   const YJLoushiPage({super.key, required this.id});
@@ -23,9 +24,7 @@ class _YJLoushiPageState extends State<YJLoushiPage> {
       appBar: AppBar(
         title: Text(
           local!.loushi,
-          style: const TextStyle(
-            fontSize: 18,
-          ),
+          style: TextStyle(fontSize: YJConstant.titleFontSize),
         ),
       ),
       body: Container(

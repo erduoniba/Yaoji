@@ -5,6 +5,7 @@ import 'package:card_swiper/card_swiper.dart';
 
 import 'package:yaoji/pages/home/models/home_model.dart';
 import 'package:yaoji/common/colors.dart';
+import 'package:yaoji/common/constant.dart';
 
 final class HomeAdvView extends StatelessWidget {
   const HomeAdvView({
@@ -23,7 +24,8 @@ final class HomeAdvView extends StatelessWidget {
           AdvItem item = advModel.list[index];
           return Container(
             height: 120,
-            padding: const EdgeInsets.only(left: 16, right: 16),
+            padding: EdgeInsets.only(
+                left: YJConstant.padding, right: YJConstant.padding),
             child: CachedNetworkImage(imageUrl: item.coverImg ?? ""),
           );
         },

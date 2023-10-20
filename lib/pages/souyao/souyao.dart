@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaoji/common/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:yaoji/common/constant.dart';
 
 class YJSouyaoPage extends StatefulWidget {
   const YJSouyaoPage({super.key});
@@ -16,9 +17,7 @@ class _YJSouyaoPageState extends State {
       appBar: AppBar(
         title: Text(
           local!.souyao,
-          style: const TextStyle(
-            fontSize: 18,
-          ),
+          style: TextStyle(fontSize: YJConstant.titleFontSize),
         ),
       ),
       body: Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
+import 'package:yaoji/common/constant.dart';
 // import 'package:go_router/go_router.dart';
 
 import 'package:yaoji/pages/home/models/home_model.dart';
@@ -44,11 +45,11 @@ final class HomeTodayWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        Text(
           "今日推荐",
           style: TextStyle(
             color: Colors.black,
-            fontSize: 18,
+            fontSize: YJConstant.titleFontSize,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -67,11 +68,11 @@ final class HomeTodayWidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: YJConstant.borderRadius,
       ),
       // clipsToBounds 相似能力
       clipBehavior: Clip.antiAlias,
-      margin: const EdgeInsets.only(top: 16),
+      margin: EdgeInsets.only(top: YJConstant.padding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -82,7 +83,7 @@ final class HomeTodayWidget extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(YJConstant.padding),
             child: Text(
               todayItem.title ?? "",
               style: const TextStyle(
@@ -92,7 +93,11 @@ final class HomeTodayWidget extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+            padding: EdgeInsets.only(
+              left: YJConstant.padding,
+              right: YJConstant.padding,
+              bottom: YJConstant.padding,
+            ),
             child: Text(
               todayItem.brief ?? "",
               style: const TextStyle(
@@ -118,8 +123,14 @@ final class HomeTodayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 16, bottom: 16),
-      padding: const EdgeInsets.only(left: 16, right: 16),
+      margin: EdgeInsets.only(
+        top: YJConstant.padding,
+        bottom: YJConstant.padding,
+      ),
+      padding: EdgeInsets.only(
+        left: YJConstant.padding,
+        right: YJConstant.padding,
+      ),
       child: Column(
         children: [
           _titleWidget(context),
