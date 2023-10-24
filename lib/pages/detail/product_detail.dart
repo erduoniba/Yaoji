@@ -2,15 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yaoji/pages/detail/models/detail_model.dart';
 import 'package:yaoji/pages/detail/requests/detail_request.dart';
 import 'widgets/book_widget.dart';
 import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/common/constant.dart';
 
-final class YJProductDetailPage extends StatefulWidget {
-  final int id;
-  const YJProductDetailPage({super.key, required this.id});
+class YJProductDetailPage extends StatefulWidget {
+  int id;
+  YJProductDetailPage({super.key, required this.id});
 
   @override
   State<StatefulWidget> createState() {
@@ -72,15 +73,24 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
               Html(data: _data),
               _bookTitleWidget(),
               _bookDetailsWidget(),
+              _dateWidget(),
+              _tagsWidget(),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
         onPressed: () {
-          print("x");
+          if (_item != null && _item?.nextArticleId != null) {
+            widget.id = _item!.nextArticleId!;
+            _requestData();
+            // context.pushReplacement("/pages/detail/${_item?.nextArticleId}");
+          }
         },
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        highlightElevation: 0,
+        child: Image.asset("images/detail/iconnext.png"),
       ),
     );
   }
@@ -215,5 +225,61 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
       return Column(children: widgets);
     }
     return Container();
+  }
+
+  Widget _dateWidget() {
+    if (_item == null || _item!.date == null) {
+      return Container();
+    }
+    return Container(
+      alignment: Alignment.centerRight,
+      child: Text(
+        _item!.date ?? "",
+        style: TextStyle(color: YJColor.tipColor()),
+      ),
+    );
+  }
+
+  Widget _tagsWidget() {
+    if (_item == null || _item!.tags == null || _item!.tags!.isEmpty) {
+      return Container();
+    }
+    Color color = Colors.grey[100] ?? Colors.grey;
+
+    List<Widget> tags = [];
+    var temps = [];
+    temps.addAll(_item!.tags!);
+    // temps.addAll(_item!.tags!);
+    // temps.addAll(_item!.tags!);
+    // temps.addAll(_item!.tags!);
+    // temps.addAll(_item!.tags!);
+    // temps.addAll(_item!.tags!);
+    for (String tag in temps) {
+      Chip chip = Chip(
+        label: Text(
+          tag,
+          style: TextStyle(
+            color: YJColor.tipColor(),
+            fontSize: YJConstant.smallTipFontSize,
+          ),
+        ),
+        padding: const EdgeInsets.all(0),
+        labelPadding: const EdgeInsets.fromLTRB(4, -4, 4, -4),
+        side: BorderSide(color: color, width: 0),
+        backgroundColor: color,
+      );
+      tags.add(chip);
+    }
+
+    return Container(
+      padding: const EdgeInsets.only(top: 8),
+      alignment: Alignment.centerLeft,
+      child: Wrap(
+        alignment: WrapAlignment.start,
+        spacing: -4,
+        runSpacing: -19,
+        children: tags,
+      ),
+    );
   }
 }
