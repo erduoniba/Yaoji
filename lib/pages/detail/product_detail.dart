@@ -9,32 +9,32 @@ import 'widgets/book_widget.dart';
 import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/common/constant.dart';
 
-class YJProductDetailPage extends StatefulWidget {
-  int id;
-  YJProductDetailPage({super.key, required this.id});
+final class YJProductDetailPage extends StatefulWidget {
+  final int id;
+  const YJProductDetailPage({super.key, required this.id});
 
   @override
-  State<StatefulWidget> createState() {
-    return _YJProductDetailState();
-  }
+  State<StatefulWidget> createState() => _YJProductDetailState();
 }
 
 final class _YJProductDetailState extends State<YJProductDetailPage> {
   late String? _data = "<p>";
   late String _title = "妖记";
   ProductItem? _item;
+  late int id;
   late bool _showTranslate = true;
 
   @override
   void initState() {
     super.initState();
+    id = widget.id;
 
     _requestData();
   }
 
   _requestData() {
     EasyLoading.show();
-    DetailData.getDetail(widget.id).then((item) {
+    DetailData.getDetail(id).then((item) {
       if (item is ProductItem) {
         setState(() {
           _data = item.content;
@@ -65,32 +65,31 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
           left: YJConstant.padding,
           right: YJConstant.padding,
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _headerWidget(),
-              _contentImgWidget(),
-              Html(data: _data),
-              _bookTitleWidget(),
-              _bookDetailsWidget(),
-              _dateWidget(),
-              _tagsWidget(),
-            ],
-          ),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.only(bottom: 50),
+                child: Column(
+                  children: [
+                    _headerWidget(),
+                    _contentImgWidget(),
+                    Html(data: _data),
+                    _bookTitleWidget(),
+                    _bookDetailsWidget(),
+                    _dateWidget(),
+                    _tagsWidget(),
+                    Divider(height: 1, color: YJColor.lineColor()),
+                    _commetWidget(),
+                  ],
+                ),
+              ),
+            ),
+            Container(),
+            _bottomFuncWidget(),
+            _nextButtonWidget(),
+          ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (_item != null && _item?.nextArticleId != null) {
-            widget.id = _item!.nextArticleId!;
-            _requestData();
-            // context.pushReplacement("/pages/detail/${_item?.nextArticleId}");
-          }
-        },
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        highlightElevation: 0,
-        child: Image.asset("images/detail/iconnext.png"),
       ),
     );
   }
@@ -156,7 +155,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
               ),
               child: Text(
                 "${_item?.author ?? "纪妖"}@${_item?.picAuthor ?? ""}",
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           )
@@ -242,7 +241,9 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
 
   Widget _tagsWidget() {
     if (_item == null || _item!.tags == null || _item!.tags!.isEmpty) {
-      return Container();
+      return Container(
+        padding: EdgeInsets.only(top: 8, bottom: YJConstant.padding),
+      );
     }
     Color color = Colors.grey[100] ?? Colors.grey;
 
@@ -272,13 +273,70 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
     }
 
     return Container(
-      padding: const EdgeInsets.only(top: 8),
+      padding: EdgeInsets.only(top: 8, bottom: YJConstant.padding),
       alignment: Alignment.centerLeft,
       child: Wrap(
         alignment: WrapAlignment.start,
         spacing: -4,
         runSpacing: -19,
         children: tags,
+      ),
+    );
+  }
+
+  Widget _commetWidget() {
+    if (_item == null || _item?.commentNum == null || _item?.commentNum! == 0) {
+      return Container(
+        padding: const EdgeInsets.only(top: 40, bottom: 40),
+        child: Column(
+          children: [
+            Image.asset(
+              "images/detail/no_message.png",
+              height: 160,
+              fit: BoxFit.fill,
+            ),
+            const SizedBox(height: 20),
+            Text(
+              "还没有人发表评论",
+              style: TextStyle(color: YJColor.tipColor()),
+            ),
+          ],
+        ),
+      );
+    }
+    return Container();
+  }
+
+  Widget _nextButtonWidget() {
+    return Positioned(
+      bottom: 70,
+      right: 0,
+      width: 50,
+      height: 50,
+      child: FloatingActionButton(
+        onPressed: () {
+          if (_item != null && _item?.nextArticleId != null) {
+            id = _item!.nextArticleId!;
+            _requestData();
+            // context.pushReplacement("/pages/detail/${_item?.nextArticleId}");
+          }
+        },
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        highlightElevation: 0,
+        child: Image.asset("images/detail/iconnext.png"),
+      ),
+    );
+  }
+
+  Widget _bottomFuncWidget() {
+    return Positioned(
+      bottom: 0,
+      right: 0,
+      left: 0,
+      height: 50,
+      child: Container(
+        color: Colors.amber,
       ),
     );
   }

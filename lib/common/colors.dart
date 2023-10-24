@@ -27,4 +27,8 @@ class YJColor {
   static Color contentColor() {
     return Colors.black87;
   }
+
+  static Color lineColor() {
+    return Colors.black12;
+  }
 }
