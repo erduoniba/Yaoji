@@ -50,6 +50,11 @@ class ProductItem {
   @JsonKey(name: "like_num")
   int? likeNum;
 
+  @JsonKey(name: "is_collect")
+  int? isCollect;
+  @JsonKey(name: "is_like")
+  int? isLike;
+
   @JsonKey(name: "next_article_id")
   int? nextArticleId;
   @JsonKey(name: "next_article_title")
@@ -72,6 +77,8 @@ class ProductItem {
     this.date,
     this.introduction,
     this.likeNum,
+    this.isCollect,
+    this.isLike,
     this.nextArticleId,
     this.nextArticleTitle,
     this.picAuthor,

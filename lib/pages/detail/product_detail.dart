@@ -8,6 +8,7 @@ import 'package:yaoji/pages/detail/requests/detail_request.dart';
 import 'widgets/book_widget.dart';
 import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/common/constant.dart';
+import 'package:yaoji/pages/detail/widgets/bottom_widget.dart';
 
 final class YJProductDetailPage extends StatefulWidget {
   final int id;
@@ -24,12 +25,31 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
   late int id;
   late bool _showTranslate = true;
 
+  final FocusNode _focusNode = FocusNode();
+
+  void _onFocusChange() {
+    if (_focusNode.hasFocus) {
+      // TextField获取焦点时，显示键盘
+    } else {
+      // TextField失去焦点时，隐藏键盘
+      FocusScope.of(context).unfocus();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     id = widget.id;
+    _focusNode.addListener(_onFocusChange);
 
     _requestData();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.removeListener(_onFocusChange);
+    _focusNode.dispose();
+    super.dispose();
   }
 
   _requestData() {
@@ -59,37 +79,48 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
           style: TextStyle(fontSize: YJConstant.titleFontSize),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).padding.bottom,
-          left: YJConstant.padding,
-          right: YJConstant.padding,
-        ),
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Container(
-                padding: const EdgeInsets.only(bottom: 50),
-                child: Column(
-                  children: [
-                    _headerWidget(),
-                    _contentImgWidget(),
-                    Html(data: _data),
-                    _bookTitleWidget(),
-                    _bookDetailsWidget(),
-                    _dateWidget(),
-                    _tagsWidget(),
-                    Divider(height: 1, color: YJColor.lineColor()),
-                    _commetWidget(),
-                  ],
-                ),
+      body: GestureDetector(
+        onTap: () {
+          // 点击除TextField外的其他区域时，隐藏键盘
+          FocusScope.of(context).unfocus();
+        },
+        child: _bodyWidget(),
+      ),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return Container(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).padding.bottom,
+        left: YJConstant.padding,
+        right: YJConstant.padding,
+      ),
+      color: Colors.white,
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Column(
+                children: [
+                  _headerWidget(),
+                  _contentImgWidget(),
+                  Html(data: _data),
+                  _bookTitleWidget(),
+                  _bookDetailsWidget(),
+                  _dateWidget(),
+                  _tagsWidget(),
+                  Divider(height: 1, color: YJColor.lineColor()),
+                  _commetWidget(),
+                ],
               ),
             ),
-            Container(),
-            _bottomFuncWidget(),
-            _nextButtonWidget(),
-          ],
-        ),
+          ),
+          Container(),
+          _bottomFuncWidget(),
+          _nextButtonWidget(),
+        ],
       ),
     );
   }
@@ -335,9 +366,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
       right: 0,
       left: 0,
       height: 50,
-      child: Container(
-        color: Colors.amber,
-      ),
+      child: BootomFunctionWidget(_item, _focusNode),
     );
   }
 }
