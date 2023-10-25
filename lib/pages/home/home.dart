@@ -63,7 +63,7 @@ class _YJHomePageState extends State<YJHomePage> {
         child: _homeListView(),
       ),
       // body: _homeListView(),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[300],
     );
   }
 }

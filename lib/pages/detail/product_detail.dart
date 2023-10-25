@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:go_router/go_router.dart';
 import 'package:yaoji/pages/detail/models/detail_model.dart';
 import 'package:yaoji/pages/detail/requests/detail_request.dart';
 import 'widgets/book_widget.dart';

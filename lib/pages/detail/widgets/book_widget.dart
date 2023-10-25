@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/pages/detail/models/detail_model.dart';
 
@@ -15,7 +16,7 @@ class BookWidget extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 20),
-          _titleWidget(),
+          _titleWidget(context),
           _originWidget(),
           _translateWidget(),
         ],
@@ -23,7 +24,7 @@ class BookWidget extends StatelessWidget {
     );
   }
 
-  Widget _titleWidget() {
+  Widget _titleWidget(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10),
       height: 20,
@@ -35,10 +36,15 @@ class BookWidget extends StatelessWidget {
             color: Colors.black12,
           ),
           Center(
-            child: Container(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              color: Colors.white,
-              child: Text("《${book.name ?? ""}》"),
+            child: GestureDetector(
+              child: Container(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                color: Colors.white,
+                child: Text("《${book.name ?? ""}》"),
+              ),
+              onTap: () {
+                context.push("/pages/article/${book.name}");
+              },
             ),
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:yaoji/pages/article/article_list.dart';
 import 'package:yaoji/pages/home/home.dart';
 import 'package:yaoji/pages/yaobo/yaobo.dart';
 import 'package:yaoji/pages/souyao/souyao.dart';
@@ -61,5 +62,13 @@ final GoRouter yjRoute = GoRouter(
         return YJProductDetailPage(id: id);
       },
     ),
+    GoRoute(
+      name: "article",
+      path: "/pages/article/:book_name",
+      builder: (context, state) {
+        String bookName = state.pathParameters["book_name"] ?? "";
+        return YJArticleList(bookName);
+      },
+    )
   ],
 );
