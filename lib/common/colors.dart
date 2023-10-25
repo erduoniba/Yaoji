@@ -31,4 +31,8 @@ class YJColor {
   static Color lineColor() {
     return Colors.black12;
   }
+
+  static Color backgroundColor() {
+    return Colors.grey[200] ?? Colors.grey;
+  }
 }

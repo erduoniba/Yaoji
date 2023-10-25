@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/common/constant.dart';
 
 import 'package:yaoji/common/widgets/list_header.dart';
@@ -63,7 +64,7 @@ class _YJHomePageState extends State<YJHomePage> {
         child: _homeListView(),
       ),
       // body: _homeListView(),
-      backgroundColor: Colors.grey[300],
+      backgroundColor: YJColor.backgroundColor(),
     );
   }
 }

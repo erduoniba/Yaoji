@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/common/constant.dart';
 import 'package:yaoji/common/widgets/list_header.dart';
 import 'package:yaoji/pages/home/models/home_model.dart';
@@ -56,7 +57,7 @@ class _YJArticleListState extends State<YJArticleList> {
         enabled: _loading,
         child: _articleListWidget(),
       ),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: YJColor.backgroundColor(),
     );
   }
 
