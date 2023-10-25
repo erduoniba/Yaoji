@@ -284,22 +284,23 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
     // temps.addAll(_item!.tags!);
     // temps.addAll(_item!.tags!);
     // temps.addAll(_item!.tags!);
-    // temps.addAll(_item!.tags!);
     for (String tag in temps) {
-      Chip chip = Chip(
-        label: Text(
+      Container container = Container(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          color: color,
+        ),
+        child: Text(
           tag,
           style: TextStyle(
             color: YJColor.tipColor(),
             fontSize: YJConstant.smallTipFontSize,
           ),
         ),
-        padding: const EdgeInsets.all(0),
-        labelPadding: const EdgeInsets.fromLTRB(4, -4, 4, -4),
-        side: BorderSide(color: color, width: 0),
-        backgroundColor: color,
       );
-      tags.add(chip);
+
+      tags.add(container);
     }
 
     return Container(
@@ -307,8 +308,8 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
       alignment: Alignment.centerLeft,
       child: Wrap(
         alignment: WrapAlignment.start,
-        spacing: -4,
-        runSpacing: -19,
+        spacing: 4,
+        runSpacing: 4,
         children: tags,
       ),
     );
