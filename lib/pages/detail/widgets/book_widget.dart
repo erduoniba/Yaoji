@@ -43,7 +43,10 @@ class BookWidget extends StatelessWidget {
                 child: Text("《${book.name ?? ""}》"),
               ),
               onTap: () {
-                context.push("/pages/article/${book.name}");
+                context.push(
+                  "/pages/article",
+                  extra: {"bookName": book.name},
+                );
               },
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yaoji/common/constant.dart';
 
 class YJYaoboItem {
@@ -12,11 +13,23 @@ class YJYaoboItem {
 }
 
 final class YJYaoboListItemWidget extends StatelessWidget {
-  YJYaoboItem item;
-  YJYaoboListItemWidget(this.item, {super.key});
+  final YJYaoboItem item;
+  const YJYaoboListItemWidget(this.item, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    return GestureDetector(
+      child: _contentWidget(),
+      onTap: () {
+        context.push(
+          "/pages/article",
+          extra: {"category": item.category, "name": item.name},
+        );
+      },
+    );
+  }
+
+  Widget _contentWidget() {
     return Container(
       height: 120,
       padding: EdgeInsets.all(YJConstant.padding),
@@ -42,8 +55,7 @@ final class YJYaoboListItemWidget extends StatelessWidget {
             ],
           ),
           const Expanded(child: SizedBox()),
-          CachedNetworkImage(
-              imageUrl: "https://file.cbaigui.com/img/1693626778704767774.png"),
+          CachedNetworkImage(imageUrl: YJConstant.defaultImg),
         ],
       ),
     );

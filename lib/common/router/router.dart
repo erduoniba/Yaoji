@@ -64,10 +64,20 @@ final GoRouter yjRoute = GoRouter(
     ),
     GoRoute(
       name: "article",
-      path: "/pages/article/:book_name",
+      path: "/pages/article",
       builder: (context, state) {
-        String bookName = state.pathParameters["book_name"] ?? "";
-        return YJArticleList(bookName);
+        Object? extra = state.extra;
+        String bookName = (extra as Map)['bookName'] ?? "";
+        String name = (extra as Map)['name'] ?? "";
+        int? category;
+        if ((extra)["category"] != null) {
+          category = (extra)["category"];
+        }
+        return YJArticleList(
+          bookName: bookName,
+          name: name,
+          category: category,
+        );
       },
     )
   ],

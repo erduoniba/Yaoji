@@ -13,4 +13,7 @@ class YJConstant {
 
   static BorderRadius borderRadius = BorderRadius.circular(radiusValue);
   static Radius radius = Radius.circular(radiusValue);
+
+  static String defaultImg =
+      "https://file.cbaigui.com/img/1693626778704767774.png";
 }

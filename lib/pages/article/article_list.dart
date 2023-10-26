@@ -9,9 +9,11 @@ import 'package:yaoji/pages/home/widgets/home_list.dart';
 import 'request/article_request.dart';
 
 final class YJArticleList extends StatefulWidget {
-  final String bookName;
+  final String? bookName;
+  final String? name;
+  final int? category;
 
-  const YJArticleList(this.bookName, {super.key});
+  const YJArticleList({this.bookName, this.name, this.category, super.key});
 
   @override
   State<StatefulWidget> createState() => _YJArticleListState();
@@ -19,7 +21,9 @@ final class YJArticleList extends StatefulWidget {
 
 class _YJArticleListState extends State<YJArticleList> {
   late int _pageNum = 1;
-  late String _bookName;
+  late String? _bookName;
+  late String? _name;
+  late int? _category;
   late bool _loading = true;
   late bool _moreData = true;
   late List<HistoryItem> _list;
@@ -30,6 +34,8 @@ class _YJArticleListState extends State<YJArticleList> {
     super.initState();
 
     _bookName = widget.bookName;
+    _category = widget.category;
+    _name = widget.name;
     _list = [];
     _controller = EasyRefreshController(
       controlFinishLoad: true,
@@ -44,12 +50,22 @@ class _YJArticleListState extends State<YJArticleList> {
     super.dispose();
   }
 
+  String _title() {
+    if (_bookName != null && _bookName!.isNotEmpty) {
+      return _bookName!;
+    }
+    if (_name != null && _name!.isNotEmpty) {
+      return _name!;
+    }
+    return "妖记";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _bookName,
+          _title(),
           style: TextStyle(fontSize: YJConstant.titleFontSize),
         ),
       ),
@@ -100,7 +116,7 @@ extension _YJArticleListStateRequest on _YJArticleListState {
     extensionSetstate(() => _loading = true);
 
     _pageNum = 1;
-    ArticleRequest.getArticleData(_bookName).then((res) {
+    ArticleRequest.getArticleData(_bookName, _category).then((res) {
       _controller.finishRefresh();
       if (res is HistoryModel) {
         debugPrint(res.description());
@@ -116,7 +132,8 @@ extension _YJArticleListStateRequest on _YJArticleListState {
 
   _loadMoreData() {
     _pageNum++;
-    ArticleRequest.getArticleData(_bookName, pageNum: _pageNum).then((res) {
+    ArticleRequest.getArticleData(_bookName, _category, pageNum: _pageNum)
+        .then((res) {
       if (res is HistoryModel) {
         if (res.list.isNotEmpty) {
           _combineData(res.list, refresh: false);

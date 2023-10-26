@@ -61,7 +61,7 @@ final class HomeHistoryView extends StatelessWidget {
             ),
           ),
           CachedNetworkImage(
-            imageUrl: historyItem.coverImg ?? "",
+            imageUrl: _coverImg(),
             height: 60,
             width: 60,
             fit: BoxFit.cover,
@@ -69,6 +69,13 @@ final class HomeHistoryView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _coverImg() {
+    if (historyItem.coverImg != null && historyItem.coverImg!.isNotEmpty) {
+      return historyItem.coverImg!;
+    }
+    return YJConstant.defaultImg;
   }
 
   Widget _contentActionWidget(BuildContext context) {
