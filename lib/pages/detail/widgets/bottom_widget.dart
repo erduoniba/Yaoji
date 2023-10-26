@@ -81,7 +81,7 @@ final class BootomFunctionWidget extends StatelessWidget {
         ),
         Positioned(
           top: 0,
-          right: 4,
+          right: 0,
           child: Text(
             collectNum,
             style: TextStyle(
@@ -115,7 +115,7 @@ final class BootomFunctionWidget extends StatelessWidget {
         ),
         Positioned(
           top: 0,
-          right: 4,
+          right: 0,
           child: Text(
             likeNumb,
             style: TextStyle(
@@ -129,13 +129,11 @@ final class BootomFunctionWidget extends StatelessWidget {
   }
 
   Widget _shareWidget() {
-    return Container(
-      child: IconButton(
-        alignment: Alignment.center,
-        enableFeedback: false,
-        onPressed: () {},
-        icon: Image.asset("images/detail/iconshare1.png"),
-      ),
+    return IconButton(
+      alignment: Alignment.center,
+      enableFeedback: false,
+      onPressed: () {},
+      icon: Image.asset("images/detail/iconshare1.png"),
     );
   }
 }

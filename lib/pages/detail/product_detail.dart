@@ -125,10 +125,10 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
   }
 
   Widget _headerWidget() {
-    double height = 80;
+    double height = 120;
     Widget authorWidget;
     if (_item == null || _item?.author == null || _item?.author == "") {
-      height = 60;
+      height = 80;
       authorWidget = const SizedBox();
     } else {
       authorWidget = Text(
@@ -155,7 +155,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
               color: YJColor.titleColor(),
             ),
           ),
-          Expanded(child: Container()),
+          const Expanded(child: SizedBox()),
           authorWidget,
         ],
       ),
