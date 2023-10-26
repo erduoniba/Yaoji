@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:yaoji/pages/detail/models/detail_model.dart';
 import 'package:yaoji/pages/detail/requests/detail_request.dart';
+import 'package:yaoji/pages/detail/widgets/comment_widget.dart';
 import 'widgets/book_widget.dart';
 import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/common/constant.dart';
@@ -83,9 +84,13 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
           // 点击除TextField外的其他区域时，隐藏键盘
           FocusScope.of(context).unfocus();
         },
-        child: _bodyWidget(),
+        child: _bodyScrolllWidget(),
       ),
     );
+  }
+
+  Widget _bodyScrolllWidget() {
+    return Scrollbar(child: _bodyWidget());
   }
 
   Widget _bodyWidget() {
@@ -335,7 +340,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
         ),
       );
     }
-    return Container();
+    return CommentListWidget(id);
   }
 
   Widget _nextButtonWidget() {
@@ -366,7 +371,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
       right: 0,
       left: 0,
       height: 50,
-      child: BootomFunctionWidget(_item, _focusNode),
+      child: BottomFunctionWidget(_item, _focusNode),
     );
   }
 }

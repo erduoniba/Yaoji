@@ -3,8 +3,8 @@ import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/common/constant.dart';
 import 'package:yaoji/pages/detail/models/detail_model.dart';
 
-final class BootomFunctionWidget extends StatelessWidget {
-  const BootomFunctionWidget(this._item, this._focusNode, {super.key});
+final class BottomFunctionWidget extends StatelessWidget {
+  const BottomFunctionWidget(this._item, this._focusNode, {super.key});
   final ProductItem? _item;
   final FocusNode _focusNode;
 
