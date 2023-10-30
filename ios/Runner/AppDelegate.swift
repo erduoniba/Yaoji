@@ -7,7 +7,8 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GeneratedPluginRegistrant.register(with: self)
+      GeneratedPluginRegistrant.register(with: self)
+      
       if let controller: FlutterViewController = window?.rootViewController as? FlutterViewController {
           let batteryChannel = FlutterMethodChannel(name: "samples.flutter.dev/battery", binaryMessenger: controller.binaryMessenger)
           batteryChannel.setMethodCallHandler { call, result in
@@ -18,7 +19,14 @@ import Flutter
               result(FlutterMethodNotImplemented)
           }
       }
-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+      
+      if let register = registrar(forPlugin: "native-view-plugin") {
+          let factory = YJNativeViewFactory(message: register.messenger())
+          registrar(forPlugin: "<native-view-plugin>")!.register(factory, withId: "platform-view-example")
+
+      }
+      
+      return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
     private func receiveBatteryLevel(result: FlutterResult) {
