@@ -75,7 +75,7 @@ final class _CommentListState extends State<CommentListWidget> {
         ListView.builder(
           itemBuilder: (content, index) {
             return Container(
-              margin: const EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 10),
               child: _commentItemWidget(_list[index]),
             );
           },
@@ -147,6 +147,7 @@ final class _CommentListState extends State<CommentListWidget> {
             _replyCommentWidget(item),
             SizedBox(
               width: MediaQuery.of(context).size.width - 80,
+              height: 40,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
