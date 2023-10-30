@@ -24,6 +24,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
   ProductItem? _item;
   late int id;
   late bool _showTranslate = true;
+  late ScrollController _scrollController;
 
   final FocusNode _focusNode = FocusNode();
 
@@ -41,6 +42,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
     super.initState();
     id = widget.id;
     _focusNode.addListener(_onFocusChange);
+    _scrollController = ScrollController();
 
     _requestData();
   }
@@ -67,6 +69,10 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
         });
       }
       EasyLoading.dismiss();
+      Future.delayed(const Duration(seconds: 1)).then((value) {
+        // 添加测试代码，记得删除
+        // _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      });
     });
   }
 
@@ -104,6 +110,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
       child: Stack(
         children: [
           SingleChildScrollView(
+            controller: _scrollController,
             child: Container(
               padding: const EdgeInsets.only(bottom: 50),
               child: Column(

@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yaoji/common/colors.dart';
 import 'package:yaoji/common/constant.dart';
 import 'package:yaoji/common/widgets/list_header.dart';
 import 'package:yaoji/pages/detail/models/comment_model.dart';
 import 'package:yaoji/pages/detail/requests/detail_request.dart';
 import 'package:yaoji/pages/yaobo/widgets/yaobo_list.dart';
+import 'all_comment_widget.dart';
 
 final class CommentListWidget extends StatefulWidget {
   final int id;
@@ -220,6 +222,27 @@ final class _CommentListState extends State<CommentListWidget> {
         child: text,
       );
       ritems.add(contain);
+      int index = item.items!.indexOf(ritem);
+      if (index > 1) {
+        Widget moreText = Text(
+          "查看全部评论",
+          style: TextStyle(
+            fontSize: YJConstant.tipFontSize,
+            color: YJColor.themeColor(),
+          ),
+        );
+        Container contain = Container(
+          padding: const EdgeInsets.all(4),
+          child: GestureDetector(
+            onTap: () {
+              _lookAllComment(item.items!);
+            },
+            child: moreText,
+          ),
+        );
+        ritems.add(contain);
+        break;
+      }
     }
     return Container(
       width: MediaQuery.of(context).size.width - 88,
@@ -241,22 +264,77 @@ final class _CommentListState extends State<CommentListWidget> {
       return const SizedBox();
     }
     return SizedBox(
-        height: 50,
-        child: GestureDetector(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      height: 50,
+      child: GestureDetector(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "查看更多评论",
+              style: TextStyle(fontSize: YJConstant.contentFontSize),
+            ),
+            const Icon(Icons.keyboard_arrow_down_sharp),
+          ],
+        ),
+        onTap: () {
+          _loadMoreData();
+        },
+      ),
+    );
+  }
+
+  _lookAllComment(List<YJCommentItem> items) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return _allComment(items);
+      },
+    );
+  }
+
+  Widget _allComment(List<YJCommentItem> items) {
+    double titleHeight = 60.0;
+    double contentHeight = MediaQuery.of(context).size.height / 2;
+    return Container(
+      height: contentHeight + titleHeight + 2,
+      color: YJColor.backgroundColor(),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "查看更多评论",
-                style: TextStyle(fontSize: YJConstant.contentFontSize),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "关闭",
+                  style: TextStyle(
+                    fontSize: YJConstant.contentFontSize,
+                    color: YJColor.contentColor(),
+                  ),
+                ),
               ),
-              const Icon(Icons.keyboard_arrow_down_sharp),
+              Text(
+                "全部评论",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: YJConstant.detailFontSize),
+              ),
+              SizedBox(
+                width: 60,
+                height: titleHeight,
+              ),
             ],
           ),
-          onTap: () {
-            _loadMoreData();
-          },
-        ));
+          Container(
+            height: 2,
+            color: YJColor.lineColor(),
+          ),
+          AllCommentWidget(items, contentHeight),
+        ],
+      ),
+    );
   }
 }
 
