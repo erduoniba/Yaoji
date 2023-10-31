@@ -35,11 +35,13 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
           'images/tabbar/home.png',
           width: 24,
           height: 24,
+          cacheWidth: 24,
         ),
         activeIcon: Image.asset(
           'images/tabbar/homeSelect.png',
           width: 24,
           height: 24,
+          cacheWidth: 24,
         ),
       ),
       BottomNavigationBarItem(
@@ -48,11 +50,13 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
           'images/tabbar/store.png',
           width: 24,
           height: 24,
+          cacheWidth: 24,
         ),
         activeIcon: Image.asset(
           'images/tabbar/storeSelect.png',
           width: 24,
           height: 24,
+          cacheWidth: 24,
         ),
       ),
       BottomNavigationBarItem(
@@ -61,11 +65,13 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
           'images/tabbar/search.png',
           width: 24,
           height: 24,
+          cacheWidth: 24,
         ),
         activeIcon: Image.asset(
           'images/tabbar/searchSelect.png',
           width: 24,
           height: 24,
+          cacheWidth: 24,
         ),
       ),
       BottomNavigationBarItem(
@@ -74,11 +80,13 @@ class _YJBottomTabbar extends State<YJBottomTabbar> {
           'images/tabbar/send.png',
           width: 24,
           height: 24,
+          cacheWidth: 24,
         ),
         activeIcon: Image.asset(
           'images/tabbar/sendSelect.png',
           width: 24,
           height: 24,
+          cacheWidth: 24,
         ),
       ),
     ];

@@ -55,7 +55,10 @@ final class YJYaoboListItemWidget extends StatelessWidget {
             ],
           ),
           const Expanded(child: SizedBox()),
-          CachedNetworkImage(imageUrl: YJConstant.defaultImg),
+          CachedNetworkImage(
+            imageUrl: YJConstant.defaultImg,
+            memCacheHeight: 176,
+          ),
         ],
       ),
     );

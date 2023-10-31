@@ -175,6 +175,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
   }
 
   Widget _contentImgWidget() {
+    final width = MediaQuery.of(context).size.width - 2 * YJConstant.padding;
     if (_item != null &&
         _item!.contentImg != null &&
         _item!.contentImg!.isNotEmpty) {
@@ -182,6 +183,8 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
         children: [
           CachedNetworkImage(
             imageUrl: _item!.contentImg!,
+            width: width,
+            memCacheWidth: width.toInt() * 2,
             fit: BoxFit.cover,
           ),
           Positioned(
@@ -337,6 +340,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
               "images/detail/no_message.png",
               height: 160,
               fit: BoxFit.fill,
+              cacheHeight: 320,
             ),
             const SizedBox(height: 20),
             Text(

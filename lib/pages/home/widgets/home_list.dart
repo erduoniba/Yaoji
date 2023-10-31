@@ -63,7 +63,9 @@ final class HomeHistoryView extends StatelessWidget {
           CachedNetworkImage(
             imageUrl: _coverImg(),
             height: 60,
+            memCacheHeight: 120,
             width: 60,
+            memCacheWidth: 120,
             fit: BoxFit.cover,
           ),
         ],

@@ -45,6 +45,8 @@ class AllCommentWidget extends StatelessWidget {
               imageUrl: item.avatar ?? "",
               width: 30,
               height: 30,
+              memCacheWidth: 60,
+              memCacheHeight: 60,
             ),
           ),
           SizedBox(

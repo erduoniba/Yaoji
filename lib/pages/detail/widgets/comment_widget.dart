@@ -120,6 +120,8 @@ final class _CommentListState extends State<CommentListWidget> {
             imageUrl: item.avatar ?? "",
             width: 30,
             height: 30,
+            memCacheWidth: 60,
+            memCacheHeight: 60,
           ),
         ),
         SizedBox(width: YJConstant.padding),

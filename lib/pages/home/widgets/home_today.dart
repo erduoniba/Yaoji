@@ -79,6 +79,7 @@ final class HomeTodayWidget extends StatelessWidget {
           CachedNetworkImage(
             imageUrl: todayItem.coverImg ?? "",
             height: 200,
+            memCacheHeight: 400,
             width: double.infinity,
             fit: BoxFit.cover,
           ),

@@ -26,7 +26,10 @@ final class HomeAdvView extends StatelessWidget {
             height: 120,
             padding: EdgeInsets.only(
                 left: YJConstant.padding, right: YJConstant.padding),
-            child: CachedNetworkImage(imageUrl: item.coverImg ?? ""),
+            child: CachedNetworkImage(
+              imageUrl: item.coverImg ?? "",
+              memCacheHeight: 120,
+            ),
           );
         },
         pagination: SwiperPagination(
