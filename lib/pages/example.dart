@@ -48,7 +48,19 @@ class _ExampleWidgetState extends State<ExampleWidget> {
               creationParams: createParams,
               creationParamsCodec: const StandardMessageCodec(),
             ),
-          )
+          ),
+          SizedBox(
+            width: 160,
+            child: TextButton(
+              onPressed: () {
+                // 按钮点击事件
+              },
+              child: const Align(
+                alignment: Alignment.centerRight,
+                child: Text('按钮居右的文字'),
+              ),
+            ),
+          ),
         ],
       ),
     );

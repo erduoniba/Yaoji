@@ -112,7 +112,7 @@ final class _YJProductDetailState extends State<YJProductDetailPage> {
           SingleChildScrollView(
             controller: _scrollController,
             child: Container(
-              padding: const EdgeInsets.only(bottom: 50),
+              padding: const EdgeInsets.only(bottom: 70),
               child: Column(
                 children: [
                   _headerWidget(),

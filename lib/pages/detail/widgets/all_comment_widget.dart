@@ -74,7 +74,7 @@ class AllCommentWidget extends StatelessWidget {
                       onPressed: () {
                         debugPrint("点击回复");
                       },
-                      child: Container(
+                      child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
                           "回复",
