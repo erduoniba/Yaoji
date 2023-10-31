@@ -15,6 +15,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+```
 <!-- 查看package的依赖关系 -->
 
 pub deps > deps.yaml
@@ -39,12 +40,20 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 https://cloud.tencent.com/developer/article/2020032?cps_key=1d358d18a7a17b4a6df8d67a62fd3d3d
 
+```
+
+常用 API：
+
+```
 获取屏幕的宽度
 MediaQuery.of(context).size.width
 获取屏幕底部安全区域高度
 MediaQuery.of(context).padding.bottom
+```
 
-VSCode 快捷
+VSCode 快捷：
+
+```
 代码折叠
 文件所有代码
 折叠所有：command+k+0
@@ -65,3 +74,4 @@ VSCode 快捷
 跳转到行：Control + G
 执行命令
 Command + Shift + P
+```
